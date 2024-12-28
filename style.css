@@ -138,13 +138,13 @@ color: #333;
 
 text-align: center;
 
-font-weight: 600;
+font-weight: 500;
 
 }
 
 h2 {
 
-font-size: 2em;
+font-size: 1.5em;
 
 margin-bottom: 15px;
 
@@ -754,7 +754,9 @@ font-size: x-large;
     padding: 25px;
     background-color: #f5e8e8;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgb(0 0 0);  }
+    box-shadow: 0 4px 15px rgb(0 0 0);  
+    margin-top: -20px;
+}
   
   /* Main Section Styling */
   #main-section {
@@ -763,9 +765,10 @@ font-size: x-large;
   
   h2 {
     color: #df389c;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
     font-weight: bold;
+    margin-top: -20px;
   }
   
   /* Dish Container (Grid Layout) */
@@ -850,6 +853,7 @@ font-size: x-large;
   @media (max-width: 480px) {
     #dish-container {
       grid-template-columns: repeat(2, 1fr); /* 2 buttons per row on extra small screens */
+      margin-top: -20px;
     }
   
     button {
@@ -1234,6 +1238,8 @@ button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
     background-color: #f4f6f9; /* Light background for the main section */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: -20px;
+  
 }
 
 
@@ -1379,3 +1385,62 @@ button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
   margin-top: 5px;  /* Space between message and button */
   cursor: pointer;
 }
+
+#orders-by-date-container .close-btn {
+  all: unset !important; /* Reset all inherited and global styles */
+  background-color: #dc3545; /* Restore desired styles */
+  color: white;
+  font-size: 8px;
+  padding: 0;
+  height: 1px;
+  width: 4px;
+  cursor: pointer;
+  display: inline-block; /* Ensure it behaves like a button */
+}
+
+
+#orders-by-date-container .close-btn:hover {
+  background-color: #c82333 !important; /* Darker red on hover */
+}
+
+
+/* Hidden Class */
+.hidden {
+  display: none; /* Hides the element */
+}
+
+
+   /* Blinking animation */
+   @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Blinking brackets style */
+  .blinking-brackets {
+    animation: blink 1s step-start infinite;
+    font-size: 1em; /* Adjust size to match text */
+    color: #FF5733; /* Set your desired color for brackets */
+  }
+
+  /* Style for the heading */
+  .order-heading {
+    display: inline-block;
+    text-decoration: underline;
+    font-size: em; /* Adjusted font size for consistency */
+    padding: 0 10px; /* Reduced padding to bring closer to brackets */
+    color: #4CAF50; /* Set your desired color for headings */
+  }
+
+  /* Container for spacing */
+  .heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    transform: translateY(-20px); /* Adjust this value to move upwards */
+}
+  .heading-container span {
+    margin: 0 5px; /* Reduced margin to bring brackets closer */
+  }
