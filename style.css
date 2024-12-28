@@ -1458,3 +1458,84 @@ button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
   .heading-container span {
     margin: 0 5px; /* Reduced margin to bring brackets closer */
   }
+
+
+
+
+
+  
+
+/* Voice Messaging Section - Button Styling */
+#voice-controls button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: white;
+  background-color: #a55b7b;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+  width: auto;
+  height: auto;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  margin-left: 140px;
+}
+/* Voice Record Button */
+#voice-record-button {
+  background-color: red; /* Red background for the record button */
+}
+
+/* Voice Stop Button */
+#voice-stop-button {
+  background-color: orange; /* Orange for the stop button */
+}
+
+/* Send Voice Message Button */
+#voice-send-button {
+  background-color: green; /* Green background for the send button */
+}
+
+/* Hover Effect */
+#voice-controls button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active Effect */
+#voice-controls button:active {
+  transform: translateY(2px); /* Pressed down effect */
+  box-shadow: none;
+}
+
+/* Hidden buttons */
+.hidden {
+  display: none; /* Hide elements with the .hidden class */
+}
+
+/* Progress Bar Styling */
+#voice-progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  height: 5px;
+  border-radius: 3px;
+  margin-top: 10px;
+  display: none; /* Hidden by default */
+}
+
+#voice-progress-fill {
+  background-color: green;
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+}
+
+/* Recording Time Display */
+#voice-recording-time {
+  font-size: 12px; /* Smaller text for recording time */
+  margin-top: 5px;
+  color: #333;
+  display: none; /* Hidden by default */
+}
+
