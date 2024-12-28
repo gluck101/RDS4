@@ -1,0 +1,1010 @@
+
+
+/* Container styling */
+
+.container {
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  padding: 20px;
+
+  font-family: Arial, sans-serif;
+
+}
+
+/* Order and Cart Display Styling */
+
+.order-item, .cart-item, .pending-order-item {
+
+  background-color: #f9f9f9;
+
+  border: 1px solid #ddd;
+
+  padding: 10px;
+
+  margin-bottom: 10px;
+
+  border-radius: 5px;
+
+}
+
+/* General Button Styling */
+
+button {
+
+  padding: 10px;
+
+  font-size: 14px;
+
+  margin-top: 10px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+}
+
+/* Hidden Sections */
+
+.hidden { display: none; }
+
+
+
+
+
+
+
+
+#filtered-orders-container {
+margin-top: 20px;
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 10px;
+background-color: #f8f9fa;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+#filtered-orders-container.hidden {
+display: none;
+}
+
+.items-table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+font-size: 0.95rem;
+color: #333;
+}
+
+.items-table thead {
+background-color: #007bff;
+color: #fff;
+}
+
+.items-table th,
+.items-table td {
+text-align: left;
+padding: 10px;
+border: 1px solid #ddd;
+}
+
+.items-table tbody tr:nth-child(even) {
+background-color: #f9f9f9;
+}
+
+.items-table tbody tr:hover {
+background-color: #e0f3ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main Container Styling */
+
+.container {
+
+max-width: 800px;
+
+margin: 40px auto;
+
+padding: 25px;
+
+font-family: Arial, sans-serif;
+
+background-color: #f4f6f9;
+
+border-radius: 12px;
+
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Headings */
+
+h2, h3 {
+
+color: #333;
+
+text-align: center;
+
+font-weight: 600;
+
+}
+
+h2 {
+
+font-size: 2em;
+
+margin-bottom: 15px;
+
+color: #007bff;
+
+}
+
+h3 {
+
+font-size: 1.5em;
+
+margin-bottom: 10px;
+
+}
+
+/* Order Item, Cart, and Summary Box Styling */
+
+.order-item, .cart-item, .pending-order-item, .order-history-item {
+
+background-color: #ffffff;
+
+border: 1px solid #ddd;
+
+padding: 20px;
+
+margin-bottom: 20px;
+
+border-radius: 10px;
+
+transition: transform 0.2s;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.order-item:hover, .cart-item:hover, .pending-order-item:hover, .order-history-item:hover {
+
+transform: scale(1.03);
+
+}
+
+/* Form Elements Styling */
+
+form label {
+
+font-weight: bold;
+
+color: #555;
+
+}
+
+form input[type="text"], form select, form input[type="time"] {
+
+width: 100%;
+
+padding: 12px;
+
+margin-bottom: 15px;
+
+border: 1px solid #ccc;
+
+border-radius: 5px;
+
+font-size: 15px;
+
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Button Styling */
+
+button {
+
+padding: 12px 20px;
+
+font-size: 15px;
+
+border: none;
+
+border-radius: 8px;
+
+cursor: pointer;
+
+color: white;
+
+background-color: #007bff;
+
+transition: background-color 0.3s, transform 0.2s;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+button:hover {
+
+background-color: #0056b3;
+
+transform: scale(1.05);
+
+}
+
+.complete-order-button {
+
+background-color: #28a745;
+
+}
+
+.complete-order-button:hover {
+
+background-color: #218838;
+
+}
+
+.cancel-order-button {
+
+background-color: #dc3545;
+
+}
+
+.cancel-order-button:hover {
+
+background-color: #c82333;
+
+}
+
+#view-history-button, #go-back-button {
+
+display: block;
+
+width: 100%;
+
+margin: 15px 0;
+
+font-size: 15px;
+
+}
+
+/* Order Summary Styling */
+
+.pending-order-item {
+
+background-color: #f9f9f9;
+
+padding: 30px;
+
+border: 2px solid #ddd;
+
+border-radius: 12px;
+
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+
+font-family: Arial, sans-serif;
+
+max-width: 700px;
+
+margin: 20px auto;
+
+}
+
+/* General Text Styling */
+
+.pending-order-item p {
+
+margin: 12px 0;
+
+color: #333;
+
+font-size: 16px;
+
+}
+
+/* Label Styling */
+
+.pending-order-item p strong {
+
+font-weight: 700;
+
+color: #444;
+
+}
+
+/* Order Items Table Styling */
+
+.pending-order-item .items-table {
+
+width: 100%;
+
+border-collapse: collapse;
+
+margin-top: 15px;
+
+font-size: 16px;
+
+}
+
+.pending-order-item .items-table th {
+
+background-color: #007bff;
+
+color: white;
+
+font-weight: bold;
+
+padding: 12px;
+
+text-align: left;
+
+border-bottom: 2px solid #ddd;
+
+}
+
+.pending-order-item .items-table td {
+
+padding: 10px;
+
+border-bottom: 1px solid #eee;
+
+color: #333;
+
+}
+
+.pending-order-item .items-table tr:nth-child(even) {
+
+background-color: #f9f9f9;
+
+}
+
+.pending-order-item .items-table tr:hover {
+
+background-color: #e0f3ff;
+
+}
+
+/* Status Message Styling */
+
+.pending-order-item p:contains("Your order is ready and Completed.") {
+
+font-size: 17px;
+
+color: #28a745;
+
+font-weight: bold;
+
+background-color: #e6f9e9;
+
+padding: 12px;
+
+border-radius: 8px;
+
+text-align: center;
+
+}
+
+/* Completed At and Time Remaining Styling */
+
+.pending-order-item p:contains("Completed At:") {
+
+margin-top: 10px;
+
+}
+
+/* Enlarged Circular Countdown Timer */
+
+.pending-order-item .countdown-timer {
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+font-size: 15px;
+
+color: white;
+
+font-weight: bold;
+
+width: 80px;
+
+height: 80px;
+
+margin: 20px auto 0;
+
+background-color: #ff4b5c;
+
+border-radius: 50%;
+
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+text-align: center;
+
+line-height: 1.5;
+
+animation: countdownPulse 1s infinite;
+
+}
+
+/* Hide "Time Remaining" Label */
+
+.pending-order-item p:contains("Time Remaining") {
+
+display: none;
+
+}
+
+/* Countdown Animation */
+
+@keyframes countdownPulse {
+
+0%, 100% { transform: scale(1); }
+
+50% { transform: scale(1.1); }
+
+}
+
+/* OK Button Styling */
+
+.pending-order-item .ok-button {
+
+display: block;
+
+margin: 25px auto 0;
+
+padding: 12px 24px;
+
+font-size: 16px;
+
+color: white;
+
+background-color: #007bff;
+
+border: none;
+
+border-radius: 30px;
+
+cursor: pointer;
+
+transition: background-color 0.3s, transform 0.2s;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.pending-order-item .ok-button:hover {
+
+background-color: #0056b3;
+
+transform: scale(1.05);
+
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+.container, .pending-order-item {
+
+    padding: 20px;
+
+}
+
+button {
+
+    font-size: 14px;
+
+    padding: 10px 16px;
+
+}
+
+h2 {
+
+    font-size: 1.6em;
+
+}
+
+h3 {
+
+    font-size: 1.3em;
+
+}
+
+}
+
+
+
+
+
+/* Table Styling */
+.items-table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+font-size: 0.95rem;
+color: #333;
+}
+
+.items-table thead {
+background-color: #007bff;
+color: #fff;
+}
+
+.items-table th,
+.items-table td {
+text-align: left;
+padding: 10px;
+border: 1px solid #ddd;
+}
+
+.items-table tbody tr:nth-child(even) {
+background-color: #f9f9f9;
+}
+
+.items-table tbody tr:hover {
+background-color: #e0f3ff;
+}
+
+
+
+/* Styling for Completed Status */
+.status-completed {
+color: #28a745; /* Green color for completed status */
+font-weight: bold; /* Makes the text bold for emphasis */
+font-size: x-large;
+}
+
+
+
+
+
+
+/* Container Styling */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the recording button */
+.record-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.record-button:hover {
+    background-color: darkred;
+}
+
+.record-icon {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Hidden Sections */
+.hidden {
+    display: none;
+}
+
+/* General Table Styling */
+#orders-for-first-date-container, #tilapia-count-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.items-table th,
+.items-table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.items-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.items-table tbody tr:hover {
+    background-color: #e0f3ff;
+}
+
+/* Header for the First Table */
+.items-table thead {
+    background-color: #007bff;  /* Default blue header color for the first table */
+    color: #fff;
+}
+
+/* Header for the Second Table - Yellow */
+#tilapia-count-container .items-table thead {
+    background-color: yellow;  /* Set header color to yellow */
+    color: #333;  /* Ensure text is readable against yellow */
+}
+
+
+
+
+
+
+/* Add space below the order section to move the cart container down */
+#cart-container {
+    margin-top: 30px; /* Adjust this value to control the distance */
+  }
+  
+
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body and Main Container */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container Styling */
+  .container {
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #f5e8e8;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgb(0 0 0);  }
+  
+  /* Main Section Styling */
+  #main-section {
+    text-align: center;
+  }
+  
+  h2 {
+    color: #df389c;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Dish Container (Grid Layout) */
+  #dish-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 buttons per row */
+    gap: 10px;
+    justify-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 10px 12px; /* Reduced padding */
+    font-size: 15px; /* Smaller font size */
+    font-weight: bolder;
+    text-transform: capitalize;
+    background-color: #e1700f; /* Default blue */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%; /* Make buttons fill container */
+    height: 120px; /* Reduced height for smaller size */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgb(0 0 0);  
+      transition: all 0.1s ease;
+    word-wrap: break-word; /* Ensure text wraps inside button */
+    line-height: 1.2;
+  }
+  
+  /* Button Colors Based on Type */
+  button[style*="background-color: red;"] {
+    background-color: red;
+  }
+  
+  button[style*="background-color: purple;"] {
+    background-color: purple;
+  }
+  
+  button[style*="background-color: orange;"] {
+    background-color: orange;
+  }
+  
+  button[style*="background-color: green;"] {
+    background-color: green;
+  }
+  
+  /* Button Hover Effect */
+  button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  /* Active Button Effect */
+  button:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+  
+  /* Focus Effect */
+  button:focus {
+    outline: 3px solid #ffbf47;
+    outline-offset: 3px;
+  }
+  
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    #dish-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 buttons per row on smaller screens */
+    }
+  
+    button {
+      font-size: 18px; /* Even smaller font size for smaller screens */
+      height: 100px; /* Adjust button height for mobile */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #dish-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 buttons per row on extra small screens */
+    }
+  
+    button {
+      font-size: px; /* Smaller font size */
+      height: 90px; /* Even smaller button height */
+    }
+  }
+  
+
+
+  /* Ensure the record button remains small and properly sized */
+.record-button {
+    display: inline-flex; /* Use inline-flex to better align with surrounding content */
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px; /* Reduced padding to make the button smaller */
+    font-size: 15px; /* Smaller font size */
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px; /* Reduced margin */
+    transition: background-color 0.3s;
+    width: auto; /* Ensure the width adjusts to content */
+    height: auto; /* Ensure the height adjusts to content */
+    line-height: 1.2; /* Ensure line-height matches the smaller button */
+  }
+  
+  /* Adjust for the icon size if necessary */
+  .record-icon {
+    font-size: 18px; /* Size of the record icon */
+    margin-right: 5px; /* Space between the icon and text */
+  }
+  
+  /* Hidden button for stopping the recording */
+  .record-button.hidden {
+    display: none; /* Hide the stop button initially */
+  }
+  
+
+
+  /* Styling for the Send Order button */
+button[type="submit"] {
+  padding: 15px 20px; /* Reduced padding for a smaller button */
+  font-size: 16px; /* Smaller font size */
+  color: white;
+  background-color: #26849d; /* Blue background color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px; /* Slight margin on top */
+  transition: background-color 0.3s, transform 0.2s;
+  width: auto; /* Make sure the width adjusts to the content */
+  height: auto; /* Make the height adjust to the content */
+  line-height: 1.2; /* Ensure line height fits within the button */
+  margin-left: 150px;
+margin-bottom: 40px;
+}
+
+/* Hover effect */
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Active effect */
+button[type="submit"]:active {
+  transform: translateY(2px); /* Button presses down when clicked */
+  box-shadow: none;
+}
+
+
+
+/* Voice Messaging Section - Button Styling */
+#voice-controls button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #a55b7b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto;
+    height: auto;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    margin-left: 140px;
+}
+  /* Voice Record Button */
+  #voice-record-button {
+    background-color: red; /* Red background for the record button */
+  }
+  
+  /* Voice Stop Button */
+  #voice-stop-button {
+    background-color: orange; /* Orange for the stop button */
+  }
+  
+  /* Send Voice Message Button */
+  #voice-send-button {
+    background-color: green; /* Green background for the send button */
+  }
+  
+  /* Hover Effect */
+  #voice-controls button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  /* Active Effect */
+  #voice-controls button:active {
+    transform: translateY(2px); /* Pressed down effect */
+    box-shadow: none;
+  }
+  
+  /* Hidden buttons */
+  .hidden {
+    display: none; /* Hide elements with the .hidden class */
+  }
+  
+  /* Progress Bar Styling */
+  #voice-progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    height: 5px;
+    border-radius: 3px;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+  }
+  
+  #voice-progress-fill {
+    background-color: green;
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+  }
+  
+  /* Recording Time Display */
+  #voice-recording-time {
+    font-size: 12px; /* Smaller text for recording time */
+    margin-top: 5px;
+    color: #333;
+    display: none; /* Hidden by default */
+  }
+  
+
+
+  /* Analytical Button Styling */
+button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 16px; /* Smaller font size */
+    color: white;
+    background-color: #135047; /* Blue background color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Slight margin on top */
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto; /* Ensure the width adjusts to content */
+    height: auto; /* Ensure the height adjusts to content */
+    line-height: 1.2; /* Ensure text is aligned properly */
+    margin-left: 170px;
+  }
+  
+  /* Hover effect */
+  button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+  }
+  
+  /* Active effect */
+  button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"]:active {
+    transform: translateY(2px); /* Button presses down when clicked */
+    box-shadow: none;
+  }
+  
+
+  button i {
+    margin-right: 5px; /* Space between icon and text */
+    font-size: 14px; /* Adjust icon size */
+  }
+ 
+  
+  /* Active effect */
+  button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+  
+
+  /* Styling for View Order History button */
+  #view-history-button {
+    padding: 5px 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #104f50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto;
+    height: auto;
+    line-height: 1.2;
+    margin-left: 145px;
+    margin-top: 20px;
+}
+  
+  /* Hover effect */
+  #view-history-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  /* Active effect */
+  #view-history-button:active {
+    transform: translateY(2px); /* Button presses down when clicked */
+    box-shadow: none;
+  }
+  
