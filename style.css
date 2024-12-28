@@ -1,5 +1,3 @@
-
-
 /* Container styling */
 
 .container {
@@ -164,23 +162,20 @@ margin-bottom: 10px;
 
 /* Order Item, Cart, and Summary Box Styling */
 
+/* Styling for order items, cart items, pending items, and order history items */
 .order-item, .cart-item, .pending-order-item, .order-history-item {
-
-background-color: #ffffff;
-
-border: 1px solid #ddd;
-
-padding: 20px;
-
-margin-bottom: 20px;
-
-border-radius: 10px;
-
-transition: transform 0.2s;
-
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+    background-color: #544d4f;  /* Background color */
+    border: 1px solid #ff5858;  /* Border color */
+    padding: 20px;
+    color: white;               /* Text color */
+    font-size: 20px;            /* Larger font size */
+    font-weight: bold;          /* Make the font bold */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgb(0 0 0);  /* Box shadow */
 }
+
 
 .order-item:hover, .cart-item:hover, .pending-order-item:hover, .order-history-item:hover {
 
@@ -288,7 +283,7 @@ font-size: 15px;
 
 .pending-order-item {
 
-background-color: #f9f9f9;
+background-color: #528897;
 
 padding: 30px;
 
@@ -296,7 +291,7 @@ border: 2px solid #ddd;
 
 border-radius: 12px;
 
-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+box-shadow: 0 6px 15px rgb(0, 0, 0);
 
 font-family: Arial, sans-serif;
 
@@ -312,7 +307,7 @@ margin: 20px auto;
 
 margin: 12px 0;
 
-color: #333;
+color: #f1e0ba;
 
 font-size: 16px;
 
@@ -533,6 +528,76 @@ h3 {
 
 
 
+/* Styling for Pending Order Item (inside the grid) */
+.pending-order-item {
+    background-color: #528897;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    color: white;
+    font-size: 14px;
+    transition: transform 0.2s;
+    /* Removed max-width and margin to allow grid to control the layout */
+    margin: 0;  /* Make sure no unwanted margin is affecting grid */
+    /* Adjust padding or any other properties as necessary */
+  }
+  
+  /* Hover effect for pending order items */
+  .pending-order-item:hover {
+    transform: scale(1.05); /* Slight scale-up effect on hover */
+  }
+  
+  /* Styling for the Pending Orders Section */
+  #pending-orders-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 14px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Styling for the title inside Pending Orders Section */
+  #pending-orders-section h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Grid Layout for the Pending Orders */
+  #pending-orders-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row by default */
+    gap: 15px;    /* Space between items */
+    padding: 0;
+  }
+  
+  /* Responsive Design for smaller screens */
+  @media (max-width: 768px) {
+    #pending-orders-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #pending-orders-container {
+      grid-template-columns: 1fr; /* 1 item per row on smaller screens */
+    }
+  }
+  
+
+
+
+
+
+
+
+
 
 /* Table Styling */
 .items-table {
@@ -718,7 +783,7 @@ font-size: x-large;
     font-size: 15px; /* Smaller font size */
     font-weight: bolder;
     text-transform: capitalize;
-    background-color: #e1700f; /* Default blue */
+    background-color: #272444; /* Default blue */
     color: white;
     border: none;
     border-radius: 10px;
@@ -788,7 +853,7 @@ font-size: x-large;
     }
   
     button {
-      font-size: px; /* Smaller font size */
+      font-size: 16px; /* Smaller font size */
       height: 90px; /* Even smaller button height */
     }
   }
@@ -812,6 +877,9 @@ font-size: x-large;
     width: auto; /* Ensure the width adjusts to content */
     height: auto; /* Ensure the height adjusts to content */
     line-height: 1.2; /* Ensure line-height matches the smaller button */
+    margin-left: 90px;
+    margin-bottom: 30px;
+
   }
   
   /* Adjust for the icon size if necessary */
@@ -1008,3 +1076,306 @@ button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
     box-shadow: none;
   }
   
+
+  /* Styling for Delete button */
+.delete-button {
+    padding: 3px 8px; /* Reduced padding */
+    font-size: 13px; /* Smaller font size */
+    color: white;
+    background-color: #dc3545; /* Red background for delete */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px; /* Reduced margin */
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto; /* Adjusts width to content */
+    height: auto; /* Adjusts height to content */
+    line-height: 1.2; /* Aligns text properly */
+  }
+  
+  /* Hover effect */
+  .delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+  }
+  
+  /* Active effect */
+  .delete-button:active {
+    transform: translateY(1px); /* Button presses down when clicked */
+    box-shadow: none;
+  }
+  
+
+  /* Styling for selected cart item */
+.cart-item.selected {
+    color: #28a745; /* Green color for selected items */
+    font-weight: bold; /* Optional: Make selected items bold */
+  }
+  
+
+
+
+
+
+
+
+  /* Styling for the Pending Orders Section */
+#pending-orders-section {
+    background-color: #f8f9fa;  /* Light background color */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 14px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styling for the title inside Pending Orders Section */
+#pending-orders-section h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Styling for the Pending Order Table */
+.pending-order-table {
+    width: 100%;
+    border-collapse: collapse;  /* Ensures the borders of cells are combined */
+    margin-top: 15px;
+    font-size: 14px;  /* Smaller font size for a compact look */
+    background-color: #fff;  /* White background for the table */
+    border: 2px solid #333;  /* Dark border color for the table */
+}
+
+/* Styling for Table Headers */
+.pending-order-table th {
+    background-color: #007bff;  /* Blue background for header */
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #333;  /* Dark border under the header */
+}
+
+/* Styling for Table Rows */
+.pending-order-table td {
+    padding: 10px;  /* Padding inside cells */
+    border-bottom: 1px solid #333;  /* Dark border between rows */
+    color: #333;  /* Dark text color */
+}
+
+/* Alternating Row Colors for Better Readability */
+.pending-order-table tr:nth-child(even) {
+    background-color: #f9f9f9;  /* Light gray for alternating rows */
+}
+
+/* Hover Effect for Table Rows */
+.pending-order-table tr:hover {
+    background-color: #e0f3ff;  /* Light blue when hovered */
+}
+
+/* Styling for Countdown Timer */
+.countdown-timer {
+    background-color: #ff4b5c;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* Style for the unordered list (ul) inside .pending-order-item */
+.pending-order-item ul {
+    list-style-type: none;  /* Removes the default list bullets */
+    padding: 0;  /* Removes padding around the list */
+    margin: 0;  /* Removes margin around the list */
+    font-size: 12px;  /* Reduces font size for the list items */
+    line-height: 1.2;  /* Adjust line height for better spacing */
+}
+
+/* Style for individual list items (li) inside .pending-order-item */
+.pending-order-item li {
+    margin-bottom: 5px;  /* Adds space between list items */
+    color: #ddd;  /* Makes text lighter for better readability */
+}
+
+
+
+
+
+/* Styling for the new background container */
+.background-container {
+    background-image: url('https://tableneeds.com/wp-content/uploads/2024/01/When-should-you-get-a-kitchen-display-system.webp');
+    background-size: cover;        /* Makes sure the image covers the entire container */
+    background-position: center;   /* Centers the image */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    height: 150px;                 /* Adjust height as needed */
+    display: flex;
+    align-items: center;           /* Centers the content vertically */
+    justify-content: center;       /* Centers the content horizontally */
+    color: white;                  /* Makes text white to stand out against the background */
+    text-align: center;            /* Centers text */
+    margin-bottom: 20px;           /* Adds space below this container */
+}
+
+/* Styling for the title inside the background container */
+.background-container h2 {
+    font-size: 2.5em;  /* Adjust the size of the title */
+    margin: 0;         /* Removes default margin */
+    font-weight: bold; /* Makes the title bold */
+}
+
+/* Styling for the Main Section */
+#main-section {
+    padding: 20px;
+    background-color: #f4f6f9; /* Light background for the main section */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+
+
+/* Styling for the side background container */
+.background-side-container {
+    background-image: url('https://www.synergysuite.com/wp-content/uploads/2023/08/Square-KDS-restaurants-software-1000x600-1.jpg');
+    background-size: cover;         /* Makes sure the image covers the entire container */
+    background-position: center;    /* Centers the image */
+    background-repeat: no-repeat;   /* Prevents the image from repeating */
+    padding: 20px;
+    color: white;                   /* White text color for contrast */
+    text-align: center;             /* Centers text inside the container */
+    height: 150px;                  /* Adjust height as necessary */
+    border-radius: 8px;             /* Optional: rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+    margin-top: 20px;               /* Adds space between this and previous content */
+}
+
+.background-side-container h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.background-side-container button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.background-side-container button:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Styling for the status labels */
+.status {
+  font-weight: bold;
+  color: #ffcc00; /* Default color for "UNREAD" */
+}
+
+.status.read {
+  color: #28a745; /* Green color for "READ" */
+}
+
+.status.unread {
+  color: #ffcc00; /* Yellow color for "UNREAD" */
+}
+
+/* Styling for the OK button */
+.ok-button {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.ok-button:hover {
+  background-color: #218838;
+}
+
+
+/* Style for the status text "YOUR MESSAGE HAS BEEN LISTENED TO" */
+.status {
+  font-size: 16px;  /* Default font size */
+  font-weight: bold;
+  color: green;  /* Color for the initial message */
+}
+
+.status .checkmark {
+  color: blue;  /* Blue checkmark */
+  font-size: 20px;  /* Bigger size for the checkmark */
+  margin-left: 10px;
+}
+
+/* Style for status label when the message is listened to */
+.status-listened {
+  font-size: 14px;  /* Reduced font size */
+  color: blue;  /* Blue color for "YOUR MESSAGE HAS BEEN LISTENED TO" */
+}
+
+
+
+/* Style for the status text "YOUR MESSAGE HAS BEEN LISTENED TO" */
+.status {
+  font-size: 16px;  /* Default font size */
+  font-weight: bold;
+  color: green;  /* Color for the initial message */
+}
+
+.status .checkmark {
+  color: green;  /* Green checkmark */
+  font-size: 20px;  /* Larger size for the checkmark */
+  margin-left: 10px;
+  vertical-align: middle;  /* Align the checkmark vertically with the text */
+}
+
+/* Optionally, adjust font size and color when status is updated */
+.status-listened {
+  font-size: 14px;  /* Reduced font size */
+  color: green;  /* Green color for "YOUR MESSAGE HAS BEEN LISTENED TO" */
+}
+
+
+
+
+/* Style for the status text "YOUR MESSAGE HAS BEEN LISTENED TO" */
+.status {
+  font-size: 16px;  /* Default font size for status */
+  font-weight: bold;
+  color: green;  /* Color for the initial message */
+}
+
+/* Style for the checkmark */
+.status .checkmark {
+  color: green;  /* Green checkmark */
+  font-size: 20px;  /* Bigger size for the checkmark */
+  margin-left: 10px;
+  vertical-align: middle;  /* Align the checkmark vertically with the text */
+}
+
+/* Style for the unread status "Your message has not been read" */
+.status-unread {
+  font-size: 14px;
+  color: red;  /* Red color for unread status */
+  font-weight: normal;  /* Optional: you can remove the bold for unread status */
+}
+
+/* Reduce size of the OK button */
+.ok-button {
+  font-size: 12px;  /* Reduce font size */
+  padding: 5px 10px;  /* Smaller padding */
+  margin-top: 5px;  /* Space between message and button */
+  cursor: pointer;
+}
