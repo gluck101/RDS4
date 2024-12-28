@@ -163,6 +163,11 @@
       <button id="voice-send-button" class="hidden" onclick="sendVoiceNote()">📤 Send Message</button>
     </div>
   </div>
+
+  <!-- Container for Sent Messages -->
+  <div id="sent-messages-container">
+    <!-- Sent messages will appear here -->
+  </div>
 </div>
 
 
@@ -247,7 +252,6 @@ div>
 
   
 
-  
 
   
 <script>
@@ -269,19 +273,26 @@ div>
   }
 
   // Update cart display
-  function updateCartDisplay() {
-    const cartContainer = document.getElementById('cart-container');
-    cartContainer.innerHTML = '<h3>To Kitchen:</h3>';
-    cartItems.forEach((item, index) => {
-      const cartItemDiv = document.createElement('div');
-      cartItemDiv.classList.add('cart-item');
-      cartItemDiv.innerHTML = `
-        ${item.name} - GHS ${item.price} x ${item.quantity}
-        <button onclick="removeItemFromCart(${index})" class="delete-button">Delete</button>
-      `;
-      cartContainer.appendChild(cartItemDiv);
+function updateCartDisplay() {
+  const cartContainer = document.getElementById('cart-container');
+  cartContainer.innerHTML = '<h3>To Kitchen:</h3>';
+
+  cartItems.forEach((item, index) => {
+    const cartItemDiv = document.createElement('div');
+    cartItemDiv.classList.add('cart-item');
+    cartItemDiv.innerHTML = `
+      ${item.name} - GHS ${item.price} x ${item.quantity}
+      <button onclick="removeItemFromCart(${index})" class="delete-button">Delete</button>
+    `;
+
+    // Add event listener to toggle selection on click
+    cartItemDiv.addEventListener('click', () => {
+      cartItemDiv.classList.toggle('selected');
     });
-  }
+
+    cartContainer.appendChild(cartItemDiv);
+  });
+}
 
   // Remove item from cart
   function removeItemFromCart(index) {
@@ -460,11 +471,11 @@ div>
   
   
   
-  
-       function displayPendingOrder(orderData, message, orderKey) {
+  function displayPendingOrder(orderData, message, orderKey) {
     const pendingOrdersContainer = document.getElementById('pending-orders-container');
     let orderDiv = document.getElementById(`order-${orderKey}`);
 
+    // Check if the order div already exists, otherwise create it
     if (!orderDiv) {
         orderDiv = document.createElement('div');
         orderDiv.id = `order-${orderKey}`;
@@ -472,12 +483,17 @@ div>
         pendingOrdersContainer.appendChild(orderDiv);
     }
 
-    let itemsList = '<ul>';
+    // Start table structure for pending items
+    let itemsList = '<table class="pending-order-table">';
+    itemsList += ``;
+    itemsList += `<tbody>`;
+    // Loop through order items and populate table rows
     orderData.items.forEach(item => {
-        itemsList += `<li>${item.name} - Quantity: ${item.quantity}</li>`;
+        itemsList += `<tr><td>${item.name}</td><td>${item.quantity}</td></tr>`;
     });
-    itemsList += '</ul>';
+    itemsList += '</tbody></table>';
 
+    // Format timestamps
     const formattedTimestamp = new Date(orderData.timestamp).toLocaleString();
     let completionMessage = "";
 
@@ -494,25 +510,27 @@ div>
         <p><strong>Order Time:</strong> ${orderData.orderTime || 'Now'}</p>
         <p><strong>Dine-In or Takeout:</strong> ${orderData.dineInTakeout}</p>
         <p><strong>Timestamp:</strong> ${formattedTimestamp}</p>
-        <p><strong>Items:</strong> ${itemsList}</p>
+        <p><strong>Items:</strong></p>
+        ${itemsList} <!-- Insert table here -->
         <p>${message}</p>
         ${completionMessage}
         <p id="${countdownId}" class="countdown-timer">Time Remaining: --:--</p>
     `;
 
+    // Show "OK" button if the order is completed or cancelled
     if (message.includes("Completed") || message.includes("cancelled")) {
         showOKButton(orderKey);
     }
 
+    // Start countdown if estimated time is provided
     const estimatedTimeMatch = message.match(/(\d+) minutes/);
     if (estimatedTimeMatch) {
         const estimatedTime = parseInt(estimatedTimeMatch[1], 10);
         startCountdown(estimatedTime * 60, countdownId, orderKey);
     }
 }
-  
-  
-  
+
+
   
   
   
@@ -900,24 +918,232 @@ function sendVoiceNote() {
     return;
   }
 
+  // Disable the send button to prevent multiple submissions
+  document.getElementById('voice-send-button').disabled = true;
+
   const messageData = {
     sender: senderId,
     timestamp: new Date().toISOString(),
     voiceNote: voiceBase64,
+    listened: false,  // Initially false when sent
   };
 
+  console.log("Sending message data to Firebase:", messageData);  // Log message data before sending
+
+  // Push the message data to Firebase Realtime Database under the 'messages' node
   db.ref('messages').push(messageData)
-    .then(() => {
-      alert("Voice message sent successfully!");
+    .then(snapshot => {
+      const messageId = snapshot.key;
+      console.log(`Message sent successfully, ID: ${messageId}`);
+
+      // Immediately display the message in the UI after it's sent
+      displaySentMessage(messageData, messageId); 
+
+      // Optionally show a success message and remove after a short time
+      showSuccessMessage();
+      setTimeout(() => {
+        hideSuccessMessage();
+      }, 2000);  // Hide after 2 seconds
+
+      // Reset the form after sending the message
       resetVoiceMessageForm();
+      
+      // Re-enable the send button after the message is sent
+      document.getElementById('voice-send-button').disabled = false;
     })
     .catch(error => {
       console.error("Error sending voice message:", error);
       alert("Failed to send voice message.");
+
+      // Re-enable the send button in case of an error
+      document.getElementById('voice-send-button').disabled = false;
     });
 }
 
-// Reset Voice Note Form
+
+
+
+
+
+
+
+// Listen for real-time changes to the 'messages' node in Firebase
+db.ref('messages').on('child_changed', snapshot => {
+  const updatedMessageData = snapshot.val();
+  const messageId = snapshot.key;
+  
+  console.log(`Message ${messageId} updated:`, updatedMessageData);  // Log the updated message
+
+  // If the message's 'listened' status changes to true, update the UI
+  if (updatedMessageData.listened === true) {
+    // Find the message in the UI by its message ID
+    const statusLabel = document.getElementById(`status-${messageId}`);
+    const okButton = document.getElementById(`message-${messageId}`).querySelector('.ok-button');
+    
+    // Update the status label in the UI
+    statusLabel.textContent = "YOUR MESSAGE HAS BEEN LISTENED TO";  // Update status text
+    okButton.classList.remove('hidden');  // Show the OK button after the message is listened to
+  }
+});
+
+
+
+
+// Listen for real-time changes to the 'messages' node in Firebase
+function listenForMessageStatus(messageId) {
+  const messageRef = db.ref('messages/' + messageId);
+
+  messageRef.on('child_changed', snapshot => {
+    const updatedMessageData = snapshot.val();
+    const statusLabel = document.getElementById(`status-${messageId}`);
+    const okButton = document.getElementById(`message-${messageId}`).querySelector('.ok-button');
+
+    console.log(`Message ${messageId} updated:`, updatedMessageData);  // Log the updated message
+
+    // If the message's 'listened' status changes to true, update the UI
+    if (updatedMessageData.listened === true) {
+      // Update the UI to show "YOUR MESSAGE HAS BEEN LISTENED TO"
+      statusLabel.textContent = "YOUR MESSAGE HAS BEEN LISTENED TO";
+      okButton.classList.remove('hidden');  // Show the OK button after the message is listened to
+    }
+  });
+}
+
+
+
+
+
+
+
+// Show success message for message send confirmation
+function showSuccessMessage() {
+  const successMessage = document.createElement('div');
+  successMessage.classList.add('success-message');
+  successMessage.textContent = "Message Sent Successfully!";
+  document.body.appendChild(successMessage);
+}
+
+// Hide success message
+function hideSuccessMessage() {
+  const successMessage = document.querySelector('.success-message');
+  if (successMessage) {
+    successMessage.remove();
+  }
+}
+
+// Display the sent message in the UI
+function displaySentMessage(messageData, messageId) {
+  const messagesContainer = document.getElementById('sent-messages-container');
+
+  if (!messagesContainer) {
+    console.error("Error: 'sent-messages-container' not found in the DOM.");
+    return;  // Exit the function if the container is not found
+  }
+
+  // Check if the message is already displayed in the UI
+  const existingMessage = document.getElementById(`message-${messageId}`);
+  if (existingMessage) {
+    console.log(`Message ${messageId} is already in the UI. Skipping display.`);
+    return; // Prevent the same message from being added again
+  }
+
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message-item');
+  messageDiv.id = `message-${messageId}`; // Set unique ID for the message
+  
+  // Display the message with initial "listened: false"
+  messageDiv.innerHTML = `
+    <p><strong>Sender:</strong> ${messageData.sender}</p>
+    <p><strong>Sent At:</strong> ${new Date(messageData.timestamp).toLocaleString()}</p>
+    <audio controls src="${messageData.voiceNote}" id="audio-${messageId}"></audio>
+    <p id="status-${messageId}" class="status">${messageData.listened ? "YOUR MESSAGE HAS BEEN LISTENED TO" : "Your message has not been read"}</p>
+    <button onclick="removeMessage('${messageId}')" class="ok-button hidden">OK</button> <!-- Hidden initially -->
+  `;
+  
+  // Add the new message to the container
+  messagesContainer.appendChild(messageDiv);
+
+  // Listen for changes to the "listened" status in Firebase
+  listenForMessageStatus(messageId);  // Listen for real-time updates for the sent message
+}
+
+
+
+// Function to update the message UI when it is listened to
+// Function to update the message UI when it is listened to
+function updateMessageStatusUI(messageId, listened) {
+  const statusLabel = document.getElementById(`status-${messageId}`);
+  const okButton = document.getElementById(`message-${messageId}`).querySelector('.ok-button');
+  
+  if (listened) {
+    // When the message is listened to, show the green checkmark
+    statusLabel.innerHTML = `YOUR MESSAGE HAS BEEN LISTENED TO <span class="checkmark">&#10004;</span>`;
+    statusLabel.classList.remove('status-unread');
+    statusLabel.classList.add('status-listened');
+    
+    // Show the OK button
+    okButton.classList.remove('hidden');
+  } else {
+    // When the message has not been listened to, show the unread status
+    statusLabel.innerHTML = `Your message has not been read`;
+    statusLabel.classList.remove('status-listened');
+    statusLabel.classList.add('status-unread');
+    
+    // Hide the OK button
+    okButton.classList.add('hidden');
+  }
+}
+
+
+
+
+
+
+
+// Fetch and display messages when the page is loaded
+function fetchMessages() {
+  const messagesContainer = document.getElementById('sent-messages-container');
+  
+  // Listen for changes in the 'messages' node
+  db.ref('messages').on('child_added', snapshot => {
+    const messageData = snapshot.val();
+    const messageId = snapshot.key;
+
+    // Display the message in the UI (whether it's listened or not)
+    displaySentMessage(messageData, messageId);
+    
+    // Listen for updates to the "listened" status of this message
+    listenForMessageStatus(messageId);
+  });
+}
+
+// Fetch messages from Firebase when the page is loaded
+window.addEventListener('load', fetchMessages);
+
+
+
+
+
+
+// OK Button Functionality to Remove Message from UI
+function removeMessage(messageId) {
+  const messageDiv = document.getElementById(`message-${messageId}`);
+  if (messageDiv) {
+    messageDiv.remove();  // Remove the message from the UI
+    // Optionally, remove the message from Firebase if desired
+    db.ref('messages/' + messageId).remove()
+      .then(() => {
+        console.log(`Message ${messageId} removed from Firebase.`);
+      })
+      .catch(error => {
+        console.error("Error removing message from Firebase:", error);
+      });
+  }
+}
+
+
+
+// Reset Voice Note Form after sending the message
 function resetVoiceMessageForm() {
   voiceBase64 = "";
   voiceChunks = [];
@@ -937,10 +1163,7 @@ function resetVoiceMessageForm() {
   document.getElementById('voice-record-button').classList.remove('hidden');
   document.getElementById('voice-stop-button').classList.add('hidden');
 }
-  
-  
-  
-  
+
   
   
 
@@ -1090,7 +1313,7 @@ db.ref('orderHistory').orderByChild('timestamp').limitToLast(1).on('child_added'
         if (order.status === "Completed") {
             message = `${staffName}, your order is ready and completed. Go and pick it up now.`;
         } else if (order.status === "Cancelled Order") {
-            message = `${staffName},  has been cancelled.`;
+            message = `${staffName}, your order has been cancelled.`;
         } else {
             console.log(`No action defined for status: ${order.status}`);
             return; // Exit if no action is defined
@@ -1123,7 +1346,7 @@ function startCountdown(seconds, countdownId, orderKey) {
             clearInterval(interval);
             countdownDisplay.innerHTML = "Time's Up!";
             countdownDisplay.classList.add("blinking");
-            // readOutText("Time's up for this order!", 3);
+            readOutText("Time's up for this order!", 3);
             console.log(`Time's Up for Order ${orderKey}`);
         }
     }, 1000);
@@ -1194,6 +1417,7 @@ function startCountdown(seconds, countdownId, orderKey) {
 
 
 
+
 function fetchOrdersGroupedByDateAndCountTilapia() {
     const orderHistoryRef = firebase.database().ref('orderHistory');
     const ordersByDateContainer = document.getElementById('orders-by-date-container');
@@ -1202,18 +1426,12 @@ function fetchOrdersGroupedByDateAndCountTilapia() {
     orderHistoryRef.once('value', (snapshot) => {
         const orderHistoryData = snapshot.val();
 
-        if (!orderHistoryData) {
-            ordersByDateContainer.innerHTML = '<p>No orders found.</p>';
-            return;
-        }
+        // Assuming you already have a list of unique dates
+        const dates = [
+            '11/20/2024', '11/22/2024', '11/26/2024', '11/28/2024' // Replace with actual dates from your list
+        ];
 
-        // Dynamically fetch unique dates from the data
-        const dates = [...new Set(Object.values(orderHistoryData).map(order => {
-            const timestamp = new Date(order.timestamp);
-            return timestamp.toLocaleDateString(); // Format the timestamp to MM/DD/YYYY
-        }))];
-
-        // Loop through all the unique dates and fetch orders for each
+        // Loop through all the dates and fetch orders for each
         dates.forEach((date) => {
             // Create the first table to display all items for each date
             let tableHTML = `
@@ -1236,7 +1454,7 @@ function fetchOrdersGroupedByDateAndCountTilapia() {
             for (const orderKey in orderHistoryData) {
                 const order = orderHistoryData[orderKey];
                 const timestamp = new Date(order.timestamp);
-                const orderDate = timestamp.toLocaleDateString(); // Format the timestamp to just the date
+                const orderDate = timestamp.toLocaleDateString(); // Format the timestamp to just the date (e.g., MM/DD/YYYY)
 
                 // If the order is from the current date, display it in the table
                 if (orderDate === date) {
@@ -1271,7 +1489,7 @@ function fetchOrdersGroupedByDateAndCountTilapia() {
             // Append the first table to the container
             ordersByDateContainer.innerHTML += tableHTML;
 
-            // Create the second table to display the counts for Tilapia 120 and Tilapia 150
+            // Now create the second table to display the counts for Tilapia 120 and Tilapia 150
             let countTableHTML = `
                 <table class="items-table">
                     <thead>
@@ -1314,6 +1532,7 @@ function fetchOrdersGroupedByDateAndCountTilapia() {
 
 
 
+
   
 </script>
   
@@ -1323,6 +1542,10 @@ function fetchOrdersGroupedByDateAndCountTilapia() {
   
   
   
+  
+</body>
+</html>
+<!-- partial -->
   
 </body>
 </html>
