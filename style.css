@@ -855,6 +855,8 @@ font-size: x-large;
       grid-template-columns: repeat(2, 1fr); /* 2 buttons per row on extra small screens */
       margin-top: -20px;
     }
+
+    
   
     button {
       font-size: 16px; /* Smaller font size */
@@ -1411,18 +1413,30 @@ button[onclick="fetchOrdersGroupedByDateAndCountTilapia()"] {
 
 
    /* Blinking animation */
-   @keyframes blink {
-    50% {
-      opacity: 0;
+@keyframes blink {
+  50% {
+    visibility: hidden;
+  }
+}
+
+/* Blinking brackets style */
+.blinking-brackets {
+  animation: blink 1s step-start infinite;
+  -webkit-animation: blink 1s step-start infinite; /* Add webkit prefix for mobile */
+  font-size: 1em;
+  color: #FF5733;
+  visibility: visible; /* Ensure visibility */
+}
+
+
+  @media (max-width: 768px) {
+    .blinking-brackets {
+      /* Any overrides or specific styles for mobile */
     }
   }
+  
 
-  /* Blinking brackets style */
-  .blinking-brackets {
-    animation: blink 1s step-start infinite;
-    font-size: 1em; /* Adjust size to match text */
-    color: #FF5733; /* Set your desired color for brackets */
-  }
+ 
 
   /* Style for the heading */
   .order-heading {
